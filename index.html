@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>getUserMedia constraints test case</title>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  </head>
+  <body>
+    <p>This is a self-contained test case for getUserMedia video constraints.</p>
+    <video id="video"/>
+    <script type="text/javascript">
+if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+  console.error('Not supported');
+} else {
+
+  var constraints = {
+    width: {ideal: 400, max: 400},
+    height: {ideal: 100, max: 100}
+  };
+
+  var video = document.getElementById('video');
+
+  navigator.mediaDevices.getUserMedia({audio: false, video: constraints})
+    .then(function(stream) {
+      video.srcObject = stream;
+    })
+    .catch(function(err) {
+      console.error('getUserMedia error or access not granted', err);
+    });
+}
+    </script>
+  </body>
+</html>
