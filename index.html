@@ -2,20 +2,18 @@
 <html>
   <head>
     <title>getUserMedia constraints test case</title>
+    <meta name="viewport" content="width: device-width, initial-scale=1"/>
     <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   </head>
   <body>
-    <p>This is a self-contained test case for getUserMedia video constraints.</p>
-    <video/>
+    <p>Test case for getUserMedia video constraints. The video below should be max width 300px and <em>maximum height 200px</em>.</p>
+    <video autoplay/>
     <script type="text/javascript">
 if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
   console.error('Not supported');
 } else {
 
-  var constraints = {
-    width: {ideal: 400, max: 400},
-    height: {ideal: 100, max: 100}
-  };
+  var constraints = {width: {max: 300}, height: {max: 200}};
 
   var video = document.querySelector('video');
 
@@ -31,7 +29,6 @@ if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       };
 
       video.srcObject = stream;
-      video.play();
     })
     .catch(function(err) {
       console.error('getUserMedia error or access not granted', err);
